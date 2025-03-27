@@ -32,7 +32,7 @@
                 <h3>Budgeting Tool</h3>
                 <p>Create and manage your budget.</p>
                 <button onclick="openBudgetTool()">Use Budgeting Tool</button>
-                 <div id="budget-tool-content" class="hidden tool-content">
+                <div id="budget-tool-content" class="hidden tool-content">
                     <label for="income">Income:</label>
                     <input type="number" id="income" placeholder="Enter your income">
                     <label for="expenses">Expenses:</label>
@@ -45,25 +45,24 @@
                 <h3>Investment Calculator</h3>
                 <p>Calculate potential investment returns.</p>
                 <button onclick="openInvestmentCalculator()">Use Investment Calculator</button>
-                 <div id="investment-calculator-content" class="hidden tool-content">
-                        <label for="initial-investment">Initial Investment:</label>
-                        <input type="number" id="initial-investment" placeholder="Enter initial investment">
-                        <label for="annual-contribution">Annual Contribution:</label>
-                        <input type="number" id="annual-contribution" placeholder="Enter annual contribution">
-                        <label for="interest-rate">Interest Rate (%):</label>
-                        <input type="number" id="interest-rate" placeholder="Enter interest rate">
-                        <label for="years">Years:</label>
-                        <input type="number" id="years" placeholder="Enter number of years">
-                        <button onclick="calculateInvestment()">Calculate Investment</button>
-                        <div id="investment-result"></div>
-                    </div>
+                <div id="investment-calculator-content" class="hidden tool-content">
+                    <label for="initial-investment">Initial Investment:</label>
+                    <input type="number" id="initial-investment" placeholder="Enter initial investment">
+                    <label for="annual-contribution">Annual Contribution:</label>
+                    <input type="number" id="annual-contribution" placeholder="Enter annual contribution">
+                    <label for="interest-rate">Interest Rate (%):</label>
+                    <input type="number" id="interest-rate" placeholder="Enter interest rate">
+                    <label for="years">Years:</label>
+                    <input type="number" id="years" placeholder="Enter number of years">
+                    <button onclick="calculateInvestment()">Calculate Investment</button>
+                    <div id="investment-result"></div>
+                </div>
             </div>
         </section>
 
         <section id="latest-news">
             <h2>Latest Financial News</h2>
-            <ul id="news-list">
-                </ul>
+            <ul id="news-list"></ul>
         </section>
     </main>
 
@@ -74,8 +73,7 @@
     <div id="lightbox" class="hidden">
         <div id="lightbox-content">
             <span id="close-lightbox">&times;</span>
-            <div id="lightbox-inner-content">
-            </div>
+            <div id="lightbox-inner-content"></div>
         </div>
     </div>
 
