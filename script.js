@@ -84,12 +84,72 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initial setup: Add news items when the page loads
     addNewsItems();
+    //show/hide tools
+    window.openBudgetTool = function() {
+        const budgetContent = document.getElementById('budget-tool-content');
+        budgetContent.classList.toggle('show');
+    }
+
+    window.openInvestmentCalculator = function() {
+        const investmentContent = document.getElementById('investment-calculator-content');
+        investmentContent.classList.toggle('show');
+    }
+    //budget calculator
+    window.calculateBudget = function() {
+        const income = parseFloat(document.getElementById('income').value);
+        const expensesInput = document.getElementById('expenses').value;
+        const budgetResult = document.getElementById('budget-result');
+
+        if (isNaN(income)) {
+            budgetResult.textContent = "Please enter a valid income.";
+            return;
+        }
+
+        const expenses = {};
+        const expensesArray = expensesInput.split(',');
+        expensesArray.forEach(expense => {
+            const parts = expense.split(':');
+            if (parts.length === 2) {
+                const category = parts[0].trim();
+                const amount = parseFloat(parts[1].trim());
+                if (!isNaN(amount)) {
+                    expenses[category] = amount;
+                }
+            }
+        });
+
+        let totalExpenses = 0;
+        for (const category in expenses) {
+            totalExpenses += expenses[category];
+        }
+
+        const balance = income - totalExpenses;
+
+        if (balance >= 0) {
+            budgetResult.textContent = `Your budget is balanced.  You have $${balance} remaining.`;
+        } else {
+            budgetResult.textContent = `You are over budget by $${Math.abs(balance)}.`;
+        }
+    }
+    //investment calculator
+    window.calculateInvestment = function() {
+        const initialInvestment = parseFloat(document.getElementById('initial-investment').value);
+        const annualContribution = parseFloat(document.getElementById('annual-contribution').value);
+        const interestRate = parseFloat(document.getElementById('interest-rate').value) / 100;
+        const years = parseInt(document.getElementById('years').value);
+        const investmentResult = document.getElementById('investment-result');
+
+        if (isNaN(initialInvestment) || isNaN(annualContribution) || isNaN(interestRate) || isNaN(years)) {
+            investmentResult.textContent = "Please enter valid numbers for all fields.";
+            return;
+        }
+
+        let futureValue = initialInvestment;
+        for (let i = 0; i < years; i++) {
+            futureValue = futureValue * (1 + interestRate) + annualContribution;
+        }
+
+        investmentResult.textContent = `Your investment will be worth $${futureValue.toFixed(2)} after ${years} years.`;
+    }
+
 });
-
-function openBudgetTool() {
-    showMessage('Budgeting tool is under development');
-}
-
-function openInvestmentCalculator() {
-    showMessage('Investment calculator is under development');
-}
