@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Function to fetch news data from an API
     async function fetchNews() {
         try {
-            const response = await fetch('https://api.example.com/news'); // Replace with the new API URL
+            const response = await fetch('https://api.marketaux.com/v1/news/all?api_token=7f16XoULOwlU86hccykgD8oXYVEOE05p0zmqLTSW');
             const newsData = await response.json();
             addNewsItems(newsData.data); // Adjusted to match the new API response structure
         } catch (error) {
