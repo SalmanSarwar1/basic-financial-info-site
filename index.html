@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Financial Information</title>
-    <link rel="stylesheet" href="style.css"> </head>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script> </head>
 <body>
     <header>
         <h1>Welcome to Our Financial Platform</h1>
@@ -21,12 +22,27 @@
         <section id="hero">
             <h2>Your Gateway to Financial Empowerment</h2>
             <p>We provide tools and resources to help you manage your finances effectively.</p>
-            <button>Learn More</button>
+            <button id="learn-more-btn">Learn More</button>
         </section>
 
-        <section id="section1">
-            <h2>Understanding Your Finances</h2>
-            <p>Learn the basics of budgeting, saving, and investing.</p>
+        <section id="financial-tools">
+            <h2>Our Financial Tools</h2>
+            <div class="tool-card">
+                <h3>Budgeting Tool</h3>
+                <p>Create and manage your budget.</p>
+                <button onclick="openBudgetTool()">Use Budgeting Tool</button>
+            </div>
+            <div class="tool-card">
+                <h3>Investment Calculator</h3>
+                <p>Calculate potential investment returns.</p>
+                <button onclick="openInvestmentCalculator()">Use Investment Calculator</button>
+            </div>
+        </section>
+
+        <section id="latest-news">
+            <h2>Latest Financial News</h2>
+            <ul id="news-list">
+                </ul>
         </section>
     </main>
 
@@ -34,6 +50,12 @@
         <p>&copy; 2025 Financial Platform. All rights reserved.</p>
     </footer>
 
-    <script src="script.js"></script>
+    <div id="lightbox" class="hidden">
+        <div id="lightbox-content">
+            <span id="close-lightbox">&times;</span>
+            <div id="lightbox-inner-content">
+                </div>
+        </div>
+    </div>
 </body>
 </html>
