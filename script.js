@@ -20,12 +20,12 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             title: "Inflation Rate Declines Slightly",
             date: "2024-07-27",
-            content: "The inflation rate in Pakistan has declined slightly, according to the latest figures from the State Bank of Pakistan.  However, concerns remain about the long-term impact of rising energy prices.  The central bank is expected to maintain its current monetary policy...",
+            content: "The inflation rate has declined slightly, according to the latest figures from the Bureau of Statistics. However, concerns remain about the long-term impact of rising energy prices. The central bank is expected to maintain its current monetary policy...",
         },
         {
             title: "New Tax Reforms Announced",
             date: "2024-07-26",
-            content: "The government has announced a new set of tax reforms aimed at simplifying the tax code and increasing revenue collection.  The reforms include changes to income tax slabs, corporate tax rates, and sales tax regulations.  Experts are divided on the potential impact of these changes on the economy...",
+            content: "The government has announced a new set of tax reforms aimed at simplifying the tax code and increasing revenue collection. The reforms include changes to income tax slabs, corporate tax rates, and sales tax regulations. Experts are divided on the potential impact of these changes on the economy...",
         },
     ];
 
