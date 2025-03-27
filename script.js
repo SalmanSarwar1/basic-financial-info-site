@@ -4,10 +4,24 @@ document.addEventListener('DOMContentLoaded', () => {
     const lightbox = document.getElementById('lightbox');
     const closeLightbox = document.getElementById('close-lightbox');
     const lightboxInnerContent = document.getElementById('lightbox-inner-content');
+    const messageBox = document.getElementById('message-box');
+    const messageText = document.getElementById('message-text');
 
-    // Event listener for the "Learn More" button to show an alert
+    // Function to display a message
+    function showMessage(message) {
+        messageText.textContent = message;
+        messageBox.classList.remove('hidden');
+        messageBox.classList.add('show');
+
+        setTimeout(() => {
+            messageBox.classList.remove('show');
+            messageBox.classList.add('hidden');
+        }, 3000);
+    }
+
+    // Event listener for the "Learn More" button to show a message
     learnMoreBtn.addEventListener('click', () => {
-        alert('Thank you for your interest!  We will provide more information soon.');
+        showMessage('Thank you for your interest! We will provide more information soon.');
     });
 
     // Sample news data (in a real application, this would come from an API)
@@ -73,9 +87,9 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function openBudgetTool() {
-    alert("Budgeting tool is under development");
+    showMessage('Budgeting tool is under development');
 }
 
 function openInvestmentCalculator() {
-    alert("Investment Calculator is under development");
+    showMessage('Investment calculator is under development');
 }
