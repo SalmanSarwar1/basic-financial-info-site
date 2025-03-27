@@ -31,7 +31,11 @@ document.addEventListener('DOMContentLoaded', () => {
     async function fetchNews() {
         try {
             const response = await fetch('https://api.marketaux.com/v1/news/all?api_token=7f16XoULOwlU86hccykgD8oXYVEOE05p0zmqLTSW');
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
             const newsData = await response.json();
+            console.log('Fetched news data:', newsData); // Log the fetched data
             addNewsItems(newsData.data); // Adjusted to match the new API response structure
         } catch (error) {
             console.error('Failed to fetch news data:', error);
