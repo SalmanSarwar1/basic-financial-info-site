@@ -24,27 +24,19 @@ document.addEventListener('DOMContentLoaded', () => {
         showMessage('Thank you for your interest! We will provide more information soon.');
     });
 
-    // Sample news data (in a real application, this would come from an API)
-    const newsData = [
-        {
-            title: "Stock Market Reaches New Highs",
-            date: "2024-07-28",
-            content: "The stock market surged to record levels this week, driven by strong economic data and positive investor sentiment.  The S&P 500 gained 2.5%, while the Dow Jones Industrial Average rose by 2%.  Analysts predict continued growth in the coming months, but advise investors to remain cautious...",
-        },
-        {
-            title: "Inflation Rate Declines Slightly",
-            date: "2024-07-27",
-            content: "The inflation rate has declined slightly, according to the latest figures from the Bureau of Statistics. However, concerns remain about the long-term impact of rising energy prices. The central bank is expected to maintain its current monetary policy...",
-        },
-        {
-            title: "New Tax Reforms Announced",
-            date: "2024-07-26",
-            content: "The government has announced a new set of tax reforms aimed at simplifying the tax code and increasing revenue collection. The reforms include changes to income tax slabs, corporate tax rates, and sales tax regulations. Experts are divided on the potential impact of these changes on the economy...",
-        },
-    ];
+    // Function to fetch news data from an API
+    async function fetchNews() {
+        try {
+            const response = await fetch('https://api.example.com/news'); // Replace with a real news API URL
+            const newsData = await response.json();
+            addNewsItems(newsData);
+        } catch (error) {
+            console.error('Failed to fetch news data:', error);
+        }
+    }
 
     // Function to add news items to the list
-    function addNewsItems() {
+    function addNewsItems(newsData) {
         newsData.forEach((item) => {
             const listItem = document.createElement('li');
             listItem.innerHTML = `
@@ -82,9 +74,10 @@ document.addEventListener('DOMContentLoaded', () => {
         lightboxInnerContent.innerHTML = ''; // Clear content when closing
     });
 
-    // Initial setup: Add news items when the page loads
-    addNewsItems();
-    //show/hide tools
+    // Initial setup: Fetch and add news items when the page loads
+    fetchNews();
+
+    // Show/hide tools
     window.openBudgetTool = function() {
         const budgetContent = document.getElementById('budget-tool-content');
         budgetContent.classList.toggle('show');
@@ -94,13 +87,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const investmentContent = document.getElementById('investment-calculator-content');
         investmentContent.classList.toggle('show');
     }
-    //budget calculator
+
+    // Budget calculator
     window.calculateBudget = function() {
         const income = parseFloat(document.getElementById('income').value);
         const expensesInput = document.getElementById('expenses').value;
         const budgetResult = document.getElementById('budget-result');
 
-        if (isNaN(income)) {
+        if (isNaN(income) || income <= 0) {
             budgetResult.textContent = "Please enter a valid income.";
             return;
         }
@@ -112,7 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (parts.length === 2) {
                 const category = parts[0].trim();
                 const amount = parseFloat(parts[1].trim());
-                if (!isNaN(amount)) {
+                if (!isNaN(amount) && amount > 0) {
                     expenses[category] = amount;
                 }
             }
@@ -126,12 +120,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const balance = income - totalExpenses;
 
         if (balance >= 0) {
-            budgetResult.textContent = `Your budget is balanced.  You have $${balance} remaining.`;
+            budgetResult.textContent = `Your budget is balanced. You have $${balance} remaining.`;
         } else {
             budgetResult.textContent = `You are over budget by $${Math.abs(balance)}.`;
         }
     }
-    //investment calculator
+
+    // Investment calculator
     window.calculateInvestment = function() {
         const initialInvestment = parseFloat(document.getElementById('initial-investment').value);
         const annualContribution = parseFloat(document.getElementById('annual-contribution').value);
@@ -139,7 +134,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const years = parseInt(document.getElementById('years').value);
         const investmentResult = document.getElementById('investment-result');
 
-        if (isNaN(initialInvestment) || isNaN(annualContribution) || isNaN(interestRate) || isNaN(years)) {
+        if (isNaN(initialInvestment) || isNaN(annualContribution) || isNaN(interestRate) || isNaN(years) || initialInvestment <= 0 || annualContribution < 0 || interestRate <= 0 || years <= 0) {
             investmentResult.textContent = "Please enter valid numbers for all fields.";
             return;
         }
@@ -151,5 +146,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
         investmentResult.textContent = `Your investment will be worth $${futureValue.toFixed(2)} after ${years} years.`;
     }
-
 });
