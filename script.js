@@ -29,8 +29,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Function to fetch news data from an API
     async function fetchNews() {
+        var requestOptions = {
+            method: 'GET'
+        };
+
+        var params = {
+            api_token: '7f16XoULOwlU86hccykgD8oXYVEOE05p0zmqLTSW',
+            symbols: 'msft,fb',
+            limit: '50'
+        };
+
+        var esc = encodeURIComponent;
+        var query = Object.keys(params)
+            .map(function(k) { return esc(k) + '=' + esc(params[k]); })
+            .join('&');
+
         try {
-            const response = await fetch('https://api.marketaux.com/v1/news/all?api_token=7f16XoULOwlU86hccykgD8oXYVEOE05p0zmqLTSW');
+            const response = await fetch("https://api.marketaux.com/v1/news/all?" + query, requestOptions);
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
