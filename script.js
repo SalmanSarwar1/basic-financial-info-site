@@ -30,9 +30,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Function to fetch news data from an API
     async function fetchNews() {
         try {
-            const response = await fetch('https://newsapi.org/v2/top-headlines?category=business&apiKey=YOUR_API_KEY'); // Replace with a real news API URL and your API key
+            const response = await fetch('https://api.example.com/news'); // Replace with the new API URL
             const newsData = await response.json();
-            addNewsItems(newsData.articles);
+            addNewsItems(newsData.data); // Adjusted to match the new API response structure
         } catch (error) {
             console.error('Failed to fetch news data:', error);
         }
@@ -40,13 +40,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Function to add news items to the list
     function addNewsItems(newsData) {
+        newsList.innerHTML = ""; // Clear existing news items
+
         newsData.forEach((item) => {
             const listItem = document.createElement('li');
             listItem.innerHTML = `
                 <h3>${item.title}</h3>
-                <p class="news-date">${item.publishedAt}</p>
-                <p>${item.description.substring(0, 100)}...</p>
-                <button class="read-more-btn" data-title="${item.title}" data-content="${item.content}">Read More</button>
+                <p class="news-date">${new Date(item.published_at).toLocaleDateString()}</p>
+                <p>${item.snippet}</p>
+                <button class="read-more-btn" data-title="${item.title}" data-content="${item.description}">Read More</button>
             `;
             newsList.appendChild(listItem);
         });
