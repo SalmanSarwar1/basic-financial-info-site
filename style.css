@@ -1,4 +1,4 @@
-Project 1: Enhanced Financial Information Site (Step-by-Step)Since you're working directly with GitHub, I'll provide the updated code for each file. You can then edit the files in your GitHub repository.Step 2: Update style.cssHere's the updated style.css content, which includes styles for the tools section, the news section, and the lightbox:body {
+body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
@@ -192,15 +192,3 @@ a {
 a:hover {
     text-decoration: underline;
 }
-Key Changes in style.css:Styled for Tools and News: Styles are added for the tools section (#financial-tools, .tool-card) and the news section (#latest-news, #news-list).Lightbox Styling: Styles are included for the lightbox (#lightbox, #lightbox-content, #close-lightbox) to create a modal-like effect.Button Styling: The button style is updated and applied to the new buttons.To update style.css on GitHub:Go to your repository on GitHub.Navigate to the style.css file.Click the "Edit" button (it looks like a pencil).Replace the existing code with the code provided above.Scroll down and commit the changes. Give the commit a descriptive message like "Updated style.css for tools and news sections."Once you've updated  style.css on GitHub, let me know, and we'll move on to the next step: creating the  script.js  file.
-  @media print {
-    .ms-editor-squiggler {
-        display:none !important;
-    }
-  }
-  .ms-editor-squiggler {
-    all: initial;
-    display: block !important;
-    height: 0px !important;
-    width: 0px !important;
-  }
