@@ -12,12 +12,15 @@ document.addEventListener('DOMContentLoaded', () => {
         messageText.textContent = message;
         messageBox.classList.remove('hidden');
         messageBox.classList.add('show');
+    }
 
-        setTimeout(() => {
+    // Hide message box when clicking anywhere on the page
+    document.addEventListener('click', (event) => {
+        if (!messageBox.contains(event.target) && !learnMoreBtn.contains(event.target)) {
             messageBox.classList.remove('show');
             messageBox.classList.add('hidden');
-        }, 3000);
-    }
+        }
+    });
 
     // Event listener for the "Learn More" button to show a message
     learnMoreBtn.addEventListener('click', () => {
@@ -27,9 +30,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Function to fetch news data from an API
     async function fetchNews() {
         try {
-            const response = await fetch('https://api.example.com/news'); // Replace with a real news API URL
+            const response = await fetch('https://newsapi.org/v2/top-headlines?category=business&apiKey=YOUR_API_KEY'); // Replace with a real news API URL and your API key
             const newsData = await response.json();
-            addNewsItems(newsData);
+            addNewsItems(newsData.articles);
         } catch (error) {
             console.error('Failed to fetch news data:', error);
         }
@@ -41,8 +44,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const listItem = document.createElement('li');
             listItem.innerHTML = `
                 <h3>${item.title}</h3>
-                <p class="news-date">${item.date}</p>
-                <p>${item.content.substring(0, 100)}...</p>
+                <p class="news-date">${item.publishedAt}</p>
+                <p>${item.description.substring(0, 100)}...</p>
                 <button class="read-more-btn" data-title="${item.title}" data-content="${item.content}">Read More</button>
             `;
             newsList.appendChild(listItem);
@@ -146,4 +149,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
         investmentResult.textContent = `Your investment will be worth $${futureValue.toFixed(2)} after ${years} years.`;
     }
+
+    // Tax calculator
+    window.calculateTax = function() {
+        const income = parseFloat(document.getElementById('tax-income').value);
+        const taxRate = parseFloat(document.getElementById('tax-rate').value) / 100;
+        const taxResult = document.getElementById('tax-result');
+
+        if (isNaN(income) || isNaN(taxRate) || income <= 0 || taxRate <= 0) {
+            taxResult.textContent = "Please enter valid numbers for income and tax rate.";
+            return;
+        }
+
+        const tax = income * taxRate;
+        taxResult.textContent = `Your tax liability is $${tax.toFixed(2)}.`;
+    }
+
+    // Add event listener for tax calculator
+    document.getElementById('tax-calculate-btn').addEventListener('click', calculateTax);
 });
